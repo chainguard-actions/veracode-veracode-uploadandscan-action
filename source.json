@@ -1,6 +1,16 @@
 {
   "owner": "veracode",
   "repo": "veracode-uploadandscan-action",
-  "version": "",
-  "url": "https://github.com/veracode/veracode-uploadandscan-action"
+  "version": "0.2.11",
+  "commit_sha": "ddca86b1d1d45639d1c414003f3495f71851cfe2",
+  "url": "https://github.com/veracode/veracode-uploadandscan-action",
+  "policy_sha": "d636be7e43ef829af6e853da6b3c7566db9f72fe",
+  "test_policy_sha": "843adf9e4b8f85d0c08b27b9d0b09dd094b54702",
+  "test_agent_version": "2",
+  "harden_agent_version": "2",
+  "node_artifact": {
+    "gcs_uri": "gs://prod-actions-node-artifacts/node-artifacts/veracode/veracode-uploadandscan-action/0.2.11/sha256-b67c264f5cb44ef4e26a2317bc01cffecb41cd0bea990049d40b7346703b8d04.tar.gz",
+    "sha256": "b67c264f5cb44ef4e26a2317bc01cffecb41cd0bea990049d40b7346703b8d04",
+    "size_bytes": 1231224
+  }
 }

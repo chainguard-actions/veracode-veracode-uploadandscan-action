@@ -1,0 +1,38 @@
+name: Test pattern without replacement validation
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Create a dummy file to upload
+        run: |
+          mkdir -p /tmp/veracode-test
+          echo "dummy content" > /tmp/veracode-test/app.jar
+
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          appname: "test-app"
+          createprofile: "true"
+          filepath: "/tmp/veracode-test/app.jar"
+          version: "test-scan-1.0"
+          vid: "fake-vid-00000000000000000000000000000000"
+          vkey: "fake-vkey-0000000000000000000000000000000000000000000000000000000000000000"
+          pattern: ".*\\.jar"
+          # replacement intentionally omitted to trigger validation error
+
+      - name: Assert action failed due to pattern without replacement
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action correctly failed when pattern is provided without replacement"
+          else
+            echo "FAIL: expected action to fail when pattern is set without replacement, got '$OUTCOME'"
+            exit 1
+          fi
