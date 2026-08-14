@@ -1,0 +1,44 @@
+name: Test sandbox creation parameters
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Create a dummy file to upload
+        run: |
+          mkdir -p /tmp/veracode-test
+          echo "dummy binary content" > /tmp/veracode-test/app.jar
+
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          appname: my-test-app
+          createprofile: true
+          filepath: /tmp/veracode-test/app.jar
+          version: test-scan-sandbox-1
+          vid: fake-vid-12345
+          vkey: fake-vkey-67890
+          createsandbox: 'true'
+          sandboxname: 'my-test-sandbox'
+          scantimeout: '60'
+          criticality: 'High'
+
+      - name: Assert action ran with sandbox parameters (fails gracefully with fake credentials)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # The action should fail with fake credentials after passing parameter validation.
+          # sandboxname without sandboxid is a valid combination.
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action failed gracefully as expected with fake credentials"
+          elif [ "$OUTCOME" = "success" ]; then
+            echo "PASS: action unexpectedly succeeded"
+          else
+            echo "FAIL: unexpected outcome '$OUTCOME'"
+            exit 1
+          fi

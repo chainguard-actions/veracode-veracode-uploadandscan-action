@@ -1,0 +1,98 @@
+name: 'Veracode Upload And Scan'
+description: 'Upload files to veracode and start a static scan.'
+inputs:
+  appname:  # id of input
+    description: 'appname'
+    required: true
+    default: '${{ github.repository }}'
+  createprofile:  # id of input
+    description: 'createprofile'
+    required: true
+    default: true
+  filepath:  # id of input
+    description: 'filepath'
+    required: true
+  version:  # id of input
+    description: 'version'
+    required: true
+    default: 'Scan from Github job: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}'
+  vid:  # id of input
+    description: 'vid'
+    required: true
+  vkey:  # id of input
+    description: 'vkey'
+    required: true
+  createsandbox: 
+    description: 'true or false'
+    required: false
+  sandboxname:
+    description: 'name of the sandbox'
+    required: false
+  scantimeout:
+    description: 'wait X minutes for the scan to complete'
+    required: false
+  exclude:
+    description: 'modules to exclude from module selection'
+    required: false
+  include:
+    description: 'modules to include in module selection'
+    required: false
+  criticality:
+    description: 'business criticality - policy selection'
+    required: false
+  pattern:
+    description: 'filename pattern'
+    required: false
+  replacement:
+    description: 'replacement'
+    required: false
+  sandboxid:
+    description: 'specify to scan in a sandbox'
+    required: false
+  scanallnonfataltoplevelmodules:
+    description: 'All top level modules'
+    required: false
+  selected:
+    description: 'platform selected modules'
+    required: false
+  selectedpreviously:
+    description: 'selected modules like from previous scan'
+    required: false
+  teams:
+    description: 'teams'
+    required: false
+  toplevel:
+    description: 'teams'
+    required: false
+  deleteincompletescan:
+    description: 'automatically delete the current scan if there are any errors when uploading files or starting the scan'
+    required: false
+  scanpollinginterval:
+    description: 'Interval, in seconds, to poll for the status of a running scan. Value range is 30 to 120 (two minutes). Default is 120.'
+    required: false
+  javawrapperversion:
+    description: 'specify version of the Java API Wrapper; default is latest'
+    required: false
+  debug:
+    description: 'show detailed diagnostic information, which you can use for debugging, in the output.'
+    required: false
+  includenewmodules:
+    description: 'automatically select all new top-level modules for inclusion in the scan'
+    required: false  
+  maxretrycount:
+    description: 'Number of times to retry the last request during certain error conditions or when a request times out. Value range is 1 to 5.'
+    required: false
+    default: 5
+  policy:
+    description: 'Veracode Policy Name'
+    required: false
+    default: ''
+
+
+# outputs:
+#   time: # id of output
+#     description: 'The time we greeted you'
+runs:
+  pre: chainguard-phonehome.js
+  using: 'node20'
+  main: 'dist/index.js'
