@@ -9,6 +9,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
 | 0.2.10 | [`0.2.10`](https://github.com/chainguard-actions/veracode-veracode-uploadandscan-action/tree/0.2.10) | [`4e085f4`](https://github.com/veracode/veracode-uploadandscan-action/commit/4e085f49ae0fba919fa0fb27cb1d4262284d9243) |
+| 0.2.11 | [`0.2.11`](https://github.com/chainguard-actions/veracode-veracode-uploadandscan-action/tree/0.2.11) | [`ddca86b`](https://github.com/veracode/veracode-uploadandscan-action/commit/ddca86b1d1d45639d1c414003f3495f71851cfe2) |
 
 ## Privacy
 
